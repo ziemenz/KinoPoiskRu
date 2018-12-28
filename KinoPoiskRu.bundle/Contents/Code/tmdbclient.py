@@ -15,7 +15,7 @@ by Celia Oakley and licenced with GPLv3.
 import json
 
 
-API_KEY = 'a3dc111e66105f6387e99393813ae4d5'
+API_KEY = '87be3be1e0d9e561dd3fa7ee95be5d93'
 API_VERSION = '3'
 
 
