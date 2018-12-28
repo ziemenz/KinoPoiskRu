@@ -158,7 +158,23 @@ def getElementFromHttpRequest(url, encoding, userAgent=USER_AGENT):
   for i in range(3):
     errorCount = 0
     try:
-      response = HTTP.Request(url, headers = {'User-agent': userAgent, 'Accept': 'text/html'})
+      headers = {
+        'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
+        'Cookie': 'kpunk=1; yandex_plus_metrika_cookie=true; noflash=true; rheftjdd='
+                  'rheftjddVal; my_perpages=%5B%5D; result_type=simple; tc=1; '
+                  'user_country=ru; yandex_gid=213; kpunk=1; cmtchd=MTU0NTkyODM3MjE1Nw==; '
+                  'crookie=o+ubbKRI7t4rpWBZnJlvsDu9dMEXjWMXgcPFrxIw+kU+QhuXnnNwhSS4O80A/SzppwlLh2QY9k/JulJj9LA8XIcfHdU=; '
+                  'refresh_yandexuid=7770416071514495877; yandexuid=7770416071514495877; '
+                  'desktop_session_key=fab8b7404400ea523aceea55037d23d56364e286d9680094dfa2d'
+                  '4b95eaf8ef5c448086228d864048aec28bd7a9ed3ef6b330f197076e954788b3cc93bd4e5f251b28a'
+                  '6c1c183a3754d2f84c18367689b4866fb3f8fbc99dadbfb4edc66d5cbb; desktop_session_key.sig=z'
+                  'iS7XrWmresj17PizmbhxSpcfC0; PHPSESSID=mitgf15vhtgrjqig6jhuvr37m2; mobile=no; _csrf_csrf'
+                  '_token=GnBPVPxBS-NjiGUk8YlUzn8z_dxc0XSGYAxqpDNIDwI; i=Z/U6R0MOxOEEha1C+a+JbVIKezePcOUo'
+                  'ld8RH4vSWhs2m9Is2P7OC6Yk8i2KOWDIqH2PZPsNhXEorCZq63LhC/5WZPQ=',
+        'DNT': '1',
+        'User-agent': userAgent,
+      }
+      response = HTTP.Request(url, headers = headers)
       return HTML.ElementFromString(str(response).decode(encoding))
     except Exception as e:
       errorCount = errorCount + 1
