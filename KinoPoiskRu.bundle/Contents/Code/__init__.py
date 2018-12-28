@@ -379,7 +379,7 @@ class KinoPoiskRuShowsAgent(Agent.TV_Shows):
         self.parseStudioPageData(metadata, kinoPoiskId)                 # Studio. Студия.
         self.parseCastPageData(titlePage, metadata, kinoPoiskId)        # Actors, etc. Актёры. др.
         self.parsePostersPageData(metadata, kinoPoiskId, lang)                # Posters. Постеры.
-        self.parseStillsPageData(metadata, kinoPoiskId)                 # Background art. Stills.
+        self.parseStillsPageData(metadata, kinoPoiskId, lang)                 # Background art. Stills.
       except:
         common.logException('failed to update metadata for id %s' % kinoPoiskId)
 
@@ -485,7 +485,7 @@ class KinoPoiskRuShowsAgent(Agent.TV_Shows):
           pass
       metadata.posters.validate_keys(validNames)
 
-  def parseStillsPageData(self, metadata, kinoPoiskId):
+  def parseStillsPageData(self, metadata, kinoPoiskId, lang):
     """ Fetches and populates background art metadata.
         Получение адресов задников.
     """
@@ -493,7 +493,7 @@ class KinoPoiskRuShowsAgent(Agent.TV_Shows):
       metadata.art.validate_keys([])
       return
 
-    data = KinoPoiskRuShowsAgent.parser.fetchAndParseStillsData(kinoPoiskId, PREFS.maxArt)
+    data = KinoPoiskRuShowsAgent.parser.fetchAndParseStillsData(kinoPoiskId, PREFS.maxArt, lang)
     stills = data['stills']
     if stills is not None and len(stills) > 0:
       # Now, walk over the top N (<max) results and update metadata.
