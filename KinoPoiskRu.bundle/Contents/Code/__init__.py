@@ -39,7 +39,7 @@ def ValidatePrefs():
   PREFS.readPluginPreferences()
 
 
-class KinoPoiskAgent(Agent.Movies):
+class KinoPoiskRuAgent(Agent.Movies):
   name = 'KinoPoisk - Фильмы'
   languages = [Locale.Language.Russian]
   primary_provider = True
