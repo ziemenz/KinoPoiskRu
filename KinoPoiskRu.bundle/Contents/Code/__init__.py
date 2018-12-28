@@ -359,7 +359,7 @@ class KinoPoiskRuShowsAgent(Agent.TV_Shows):
       kinoPoiskId = match.groups(1)[0]
     LOGGER.Debug('parsed KinoPoisk movie title id: "%s"' % kinoPoiskId)
 
-    self.updateMediaItem(metadata, kinoPoiskId)
+    self.updateMediaItem(metadata, kinoPoiskId, lang)
 
 #    if PREFS.imdbSupport:
 #      imdbId = tmdb.findBestTitleMatch(metadata.title, "2013", lang)
@@ -368,7 +368,7 @@ class KinoPoiskRuShowsAgent(Agent.TV_Shows):
     LOGGER.Debug('UPDATE END <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<')
 
 
-  def updateMediaItem(self, metadata, kinoPoiskId):
+  def updateMediaItem(self, metadata, kinoPoiskId, lang):
     titlePage =  common.getElementFromHttpRequest(S.KINOPOISK_TITLE_PAGE_URL % kinoPoiskId, S.ENCODING_KINOPOISK_PAGE)
     if titlePage is not None:
       # Don't update if the title page was failed to load.
@@ -378,7 +378,7 @@ class KinoPoiskRuShowsAgent(Agent.TV_Shows):
         self.parseInfoTableTagAndUpdateMetadata(titlePage, metadata)    # Title, original title, ratings, and more.
         self.parseStudioPageData(metadata, kinoPoiskId)                 # Studio. Студия.
         self.parseCastPageData(titlePage, metadata, kinoPoiskId)        # Actors, etc. Актёры. др.
-        self.parsePostersPageData(metadata, kinoPoiskId)                # Posters. Постеры.
+        self.parsePostersPageData(metadata, kinoPoiskId, lang)                # Posters. Постеры.
         self.parseStillsPageData(metadata, kinoPoiskId)                 # Background art. Stills.
       except:
         common.logException('failed to update metadata for id %s' % kinoPoiskId)
@@ -464,14 +464,14 @@ class KinoPoiskRuShowsAgent(Agent.TV_Shows):
       for mainActor in KinoPoiskRuShowsAgent.parser.parseMainActorsFromLanding(titlePage):
         self.addActorToMetadata(metadata, mainActor, '')
 
-  def parsePostersPageData(self, metadata, kinoPoiskId):
+  def parsePostersPageData(self, metadata, kinoPoiskId, lang):
     """ Fetches and populates posters metadata.
     """
     if PREFS.maxPosters == 0:
       metadata.posters.validate_keys([])
       return
 
-    data = KinoPoiskRuShowsAgent.parser.fetchAndParsePostersData(kinoPoiskId, PREFS.maxPosters)
+    data = KinoPoiskRuShowsAgent.parser.fetchAndParsePostersData(kinoPoiskId, PREFS.maxPosters, lang)
     posters = data['posters']
     if posters is not None and len(posters) > 0:
       # Now, walk over the top N (<max) results and update metadata.
