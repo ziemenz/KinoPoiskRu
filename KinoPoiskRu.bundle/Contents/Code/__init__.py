@@ -471,8 +471,7 @@ class KinoPoiskRuShowsAgent(Agent.TV_Shows):
       metadata.posters.validate_keys([])
       return
 
-    data = KinoPoiskRuShowsAgent.parser.fetchAndParsePostersData(kinoPoiskId, PREFS.maxPosters, lang, 'series')
-    posters = data['posters']
+    posters = KinoPoiskRuShowsAgent.parser.fetchAndParsePostersData(kinoPoiskId, PREFS.maxPosters, lang, 'series')
     if posters is not None and len(posters) > 0:
       # Now, walk over the top N (<max) results and update metadata.
       index = 0
