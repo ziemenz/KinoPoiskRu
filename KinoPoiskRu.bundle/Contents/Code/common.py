@@ -163,6 +163,9 @@ def getElementFromHttpRequest(url, encoding, userAgent=USER_AGENT):
     except Exception as e:
       errorCount = errorCount + 1
       Log.Error('Error fetching URL: "%s".\n%s' % (url, e))
+      Log.Error('User-Agent: %s' % userAgent)
+      Log.Error('encoding: %s' % encoding)
+      Log.Debug(response)
       time.sleep(1 + errorCount)
   return None
 
