@@ -342,7 +342,7 @@ class PageParser:
           'ru')  # We are sure about the main thumb locale.
     return mainPoster
 
-  def fetchAndParsePostersData(self, kinoPoiskId, maxPosters, lang):
+  def fetchAndParsePostersData(self, kinoPoiskId, maxPosters, lang, media_type='movie'):
     """ Fetches various poster pages, parses, scores, and orders posters data.
         This will include parsing poster from the main title page and possibly
         from the posters (first) page.
@@ -350,7 +350,10 @@ class PageParser:
     # Получение ярлыка (большого если есть или маленького с главной страницы).
     mainPoster = self.fetchAndParsePosterThumbnailData(kinoPoiskId)
     if maxPosters > 1:
-      url = S.KINOPOISK_COVERS_URL % kinoPoiskId
+      url = {
+              'movie': S.KINOPOISK_COVERS_URL,
+              'series': S.KINOPOISK_POSTERS_URL,
+            }.get(media_type, S.KINOPOISK_COVERS_URL)  % kinoPoiskId
       posters = self.fetchAndParseImagesPage(url, maxPosters)
     else:
       posters = []
