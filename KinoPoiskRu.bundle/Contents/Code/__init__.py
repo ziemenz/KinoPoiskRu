@@ -9,6 +9,7 @@ Russian metadata plugin for Plex, which uses http://www.kinopoisk.ru/ to get the
 @copyright (c) 2014 by Yevgeny Nyden
 @license GPLv3, see LICENSE.MD for more details
 """
+import re
 
 import common, pageparser, tmdbapi, pluginsettings as S
 
