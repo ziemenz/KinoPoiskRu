@@ -27,7 +27,7 @@ import urllib
 
 DEBUG_SCORING = 'True' == '@DEBUG.SCORING@'
 
-USER_AGENT = 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_4) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/55.0.2883.95 Safari/537.36'
+USER_AGENT = 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_1) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/12.0.1 Safari/605.1.15'
 ENCODING_PLEX = 'utf-8'
 
 SCORE_PENALTY_ITEM_ORDER = 1
