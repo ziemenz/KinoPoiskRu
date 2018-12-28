@@ -160,9 +160,9 @@ def getElementFromHttpRequest(url, encoding, userAgent=USER_AGENT):
     try:
       response = HTTP.Request(url, headers = {'User-agent': userAgent, 'Accept': 'text/html'})
       return HTML.ElementFromString(str(response).decode(encoding))
-    except:
+    except Exception as e:
       errorCount = errorCount + 1
-      Log.Debug('Error fetching URL: "%s".' % url)
+      Log.Error('Error fetching URL: "%s".\n%s' % (url, e))
       time.sleep(1 + errorCount)
   return None
 
